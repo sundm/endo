@@ -1,0 +1,29 @@
+<UI version="4.0" >
+ <class>mendoClass</class>
+ <widget class="QMainWindow" name="mendoClass" >
+  <property name="objectName" >
+   <string notr="true">mendoClass</string>
+  </property>
+  <property name="geometry" >
+   <rect>
+	<x>0</x>
+	<y>0</y>
+	<width>600</width>
+	<height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>mendo</string>
+  </property>
+  <widget class="QMenuBar" name="menuBar" />
+  <widget class="QToolBar" name="mainToolBar" />
+  <widget class="QWidget" name="centralWidget" />
+  <widget class="QStatusBar" name="statusBar" />
+ </widget>
+ <layoutDefault spacing="6" margin="11" />
+ <pixmapfunction></pixmapfunction>
+ <resources>
+   <include location="mendo.qrc"/>
+ </resources>
+ <connections/>
+</UI>
