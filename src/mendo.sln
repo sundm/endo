@@ -22,6 +22,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mreader", "libs\mreader\mre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mui", "libs\mui\mui.vcxproj", "{2B7E356F-9AB5-40BB-A2CC-2C92F9CA59B2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "flowdash", "flowdash\flowdash.vcxproj", "{432BFF5D-4757-4357-94BE-559014D5865C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -48,6 +50,10 @@ Global
 		{2B7E356F-9AB5-40BB-A2CC-2C92F9CA59B2}.Debug|x86.Build.0 = Debug|Win32
 		{2B7E356F-9AB5-40BB-A2CC-2C92F9CA59B2}.Release|x86.ActiveCfg = Release|Win32
 		{2B7E356F-9AB5-40BB-A2CC-2C92F9CA59B2}.Release|x86.Build.0 = Release|Win32
+		{432BFF5D-4757-4357-94BE-559014D5865C}.Debug|x86.ActiveCfg = Debug|Win32
+		{432BFF5D-4757-4357-94BE-559014D5865C}.Debug|x86.Build.0 = Debug|Win32
+		{432BFF5D-4757-4357-94BE-559014D5865C}.Release|x86.ActiveCfg = Release|Win32
+		{432BFF5D-4757-4357-94BE-559014D5865C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

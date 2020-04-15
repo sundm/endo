@@ -22,12 +22,12 @@ CREATE TABLE IF NOT EXISTS `t_endoscope` (
   `production_time` datetime NOT NULL,
   `maintain_cycle` smallint NOT NULL DEFAULT 0, -- in days
   `service_year` smallint NOT NULL DEFAULT 0, -- in years
-  `step` int unsigned NOT NULL DEFAULT 0, -- 0:bind 1:leak 2:wash 3:rinse 4:sterilize 5:ending-rinse 6:dry 7:storage 8:use 9:pre-processing
+  `step` int unsigned NOT NULL DEFAULT 0, -- 0:bind 1:leak 2:wash 3:rinse 4 in-machine 5:sterilize 6:ending-rinse 7:dry 8:storage 9:use 10:pre-processing
   `cycle` int(11) NOT NULL DEFAULT 0,
   `status` tinyint NOT NULL DEFAULT 0, -- 0:normal 1:service 2:forbidden
   `is_high_risk` tinyint NOT NULL DEFAULT 0,
   `photo` varchar(128),
-  `last_maintain_time` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `last_maintain_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `remark` varchar(256),
   KEY `idx_udi` (`udi`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=120001 DEFAULT CHARSET=utf8;
