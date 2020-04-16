@@ -18,13 +18,14 @@ CREATE TABLE IF NOT EXISTS `t_operator` (
 CREATE TABLE IF NOT EXISTS `t_endoscope` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `udi` varchar(32) NOT NULL UNIQUE,
+  `cycle` int(11) NOT NULL DEFAULT 0,
   `name` varchar(32) NOT NULL,
   `production_time` datetime NOT NULL,
   `maintain_cycle` smallint NOT NULL DEFAULT 0, -- in days
   `service_year` smallint NOT NULL DEFAULT 0, -- in years
   `step` int unsigned NOT NULL DEFAULT 0, -- 0:bind 1:leak 2:wash 3:rinse 4 in-machine 5:sterilize 6:ending-rinse 7:dry 8:storage 9:use 10:pre-processing
-  `cycle` int(11) NOT NULL DEFAULT 0,
   `status` tinyint NOT NULL DEFAULT 0, -- 0:normal 1:service 2:forbidden
+  `locker_id` int NOT NULL DEFAULT 0,
   `is_high_risk` tinyint NOT NULL DEFAULT 0,
   `photo` varchar(128),
   `last_maintain_time` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -83,10 +84,10 @@ CREATE TABLE IF NOT EXISTS `t_reader` (
   `remark` varchar(128)
 ) ENGINE=InnoDB AUTO_INCREMENT=180001 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `t_storage` (
+CREATE TABLE IF NOT EXISTS `t_locker` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
-  `max` tinyint NOT NULL DEFAULT 0,
+  `max` tinyint NOT NULL DEFAULT 5,
   `status` tinyint NOT NULL DEFAULT 0, -- 0:normal 1:forbidden
   `remark` varchar(128)
 ) ENGINE=InnoDB AUTO_INCREMENT=190001 DEFAULT CHARSET=utf8;
@@ -146,18 +147,18 @@ CREATE TABLE IF NOT EXISTS `r_bench` (
   KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=310001 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `r_device` (
+CREATE TABLE IF NOT EXISTS `r_machine` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `esp_udi` varchar(32) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
-  `device_id` int unsigned NOT NULL,
-  `device_name` varchar(32) NOT NULL,
-  `device_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `device_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
+  `machine_id` int unsigned NOT NULL,
+  `machine_name` varchar(32) NOT NULL,
+  `machine_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `machine_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
   `dry_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dry_remark` varchar(256),
-  `device_photo` varchar(128),
-  `device_remark` varchar(256),
+  `machine_photo` varchar(128),
+  `machine_remark` varchar(256),
   KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE 
 ) ENGINE=InnoDB AUTO_INCREMENT=320001 DEFAULT CHARSET=utf8;
 
@@ -170,16 +171,16 @@ CREATE TABLE IF NOT EXISTS `r_manual` (
   `disinfect_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `disinfect_method` tinyint NOT NULL DEFAULT 0, -- 0:visual
   `disinfect_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
-  `end_leak_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_leak_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
+  `end_rinse_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_rinse_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
   `dry_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `disinfect_remark` varchar(256),
-  `end_leak_remark` varchar(256),
+  `end_rinse_remark` varchar(256),
   `dry_remark` varchar(256),
   KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=330001 DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `r_clinic` (
+CREATE TABLE IF NOT EXISTS `r_use` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `esp_udi` varchar(32) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
@@ -191,8 +192,19 @@ CREATE TABLE IF NOT EXISTS `r_clinic` (
   `patient_name` varchar(32) NOT NULL,
   `patient_age` tinyint DEFAULT 0,
   `patient_gender` tinyint(1) DEFAULT 2,  -- 0:male 1:female
-  `preprocess_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `patient_remark` varchar(256),
+  KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=340001 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `r_preprocess` (
+  `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
+  `esp_udi` varchar(32) NOT NULL,
+  `esp_cycle` int unsigned NOT NULL DEFAULT 0, -- cycle + 1
+  `esp_name` varchar(32) NOT NULL,
+  `op_udi`  varchar(32) NOT NULL,
+  `op_name` varchar(32) NOT NULL,
+  `preprocess_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `preprocess_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
   `preprocess_remark` varchar(256),
   KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=340001 DEFAULT CHARSET=utf8;

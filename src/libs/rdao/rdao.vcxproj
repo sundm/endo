@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dao\endoscopedao.h" />
+    <ClInclude Include="dao\flowdao.h" />
     <ClInclude Include="dao\fluidao.h" />
     <ClInclude Include="dao\machinedao.h" />
     <ClInclude Include="dao\operatordao.h" />
@@ -107,6 +108,7 @@
     <ClInclude Include="debugsqlquery.h" />
     <ClInclude Include="entity\endoscope.h" />
     <ClInclude Include="entity\enums.h" />
+    <ClInclude Include="entity\flow.h" />
     <ClInclude Include="entity\fluid.h" />
     <ClInclude Include="entity\machine.h" />
     <ClInclude Include="entity\operator.h" />

@@ -86,4 +86,9 @@ namespace Rt
 		Unqualified,
 		Uninvolved
 	};
+
+	enum RinseType {
+		Begin,
+		Ending
+	};
 }

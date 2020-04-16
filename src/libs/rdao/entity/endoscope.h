@@ -6,6 +6,7 @@
 struct Endoscope
 {
 	QString udi;
+	int cycle;
 	QString name;
 	QString photo;
 	QDate production_time;
@@ -13,8 +14,8 @@ struct Endoscope
 	QDate last_maintain_time;
 	int maintain_cycle;
 	Rt::EndoscopeCategory category;
-	int cycle;
 	Rt::FlowStatus status;
+	int lockerId;
 	QString remark;
 	Endoscope() : cycle(0), status(Rt::FlowStatus::Unknown) {}
 };

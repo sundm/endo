@@ -1,11 +1,11 @@
 #pragma once
 
 #include "enums.h"
-#include <QDateTime>
+#include <QString>
 
 struct Operator
 {
-	int id;
+	QString udi;
 	QString name;
 	QString phone;
 	Rt::Gender gender;
@@ -13,9 +13,7 @@ struct Operator
 	Rt::Role role;
 
 	Operator() :
-		id(-1),
 		gender(Rt::Gender::Unknown),
 		status(Rt::Status::Normal),
-		role(Rt::Role::Unknown),
-	{ }
+		role(Rt::Role::Unknown)	{ }
 };

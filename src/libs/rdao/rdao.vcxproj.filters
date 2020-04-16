@@ -78,6 +78,12 @@
     <ClInclude Include="dao\fluidao.h">
       <Filter>Header Files\dao</Filter>
     </ClInclude>
+    <ClInclude Include="dao\flowdao.h">
+      <Filter>Header Files\dao</Filter>
+    </ClInclude>
+    <ClInclude Include="entity\flow.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dbconnection.cpp">

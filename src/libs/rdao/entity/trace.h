@@ -1,63 +1,103 @@
 #pragma once
 
 #include "enums.h"
+#include "patient.h"
 #include <QDateTime>
 
+
 struct EndoscopeFlow {
+	struct _common_
+	{
+		QString udi;
+		QString name;
+		int cycle;
+		int category;	//0:manual; 1:with machine
+	};
+
 	struct _op_ {
-		QString op;
-		QDateTime startTime;
-		QDateTime finishTime;
+		QString op_udi;
+		QString op_name;
+	};
+
+	struct _preprocess_ {
+		_op_ pre_op;
+		QDateTime pre_time;
+		int pre_result;
+		QString pre_remark;
+	};
+
+	QDateTime bindTime;
+
+	struct _leak_
+	{
+		QDateTime leak_time;
+		int leak_result;
+		QString leak_remark;
+	};
+
+	struct _clean_
+	{
+		QString clean_id;
+		QString clean_name;
+		QDateTime clean_time;
+		
+		int clean_method;
+		int clean_result;
+		QString clean_remark;
+	};
+
+	struct _rinse_
+	{
+		QDateTime rinse_time;
+		int rinse_result;
+		QString rinse_remark;
 	};
 
 	struct _machine_ {
-		QString batchId;
-		QString device;
-		QString program;
-		QString op;
-		int cycleCount;
-		int cycleTotal;
-		
-		_machine_() :cycleCount(0), cycleTotal(0) {}
+		QString machine_id;
+		QString machine_name;
+		QDateTime leamachine_timek_time;
+		int machine_result;
+		QString machine_remark;
 	};
 
-	struct SterilizeCheck {
-		QString phyChecker;
-		QString cheChecker;
-		QString bioChecker;
-		QDateTime phyCheckTime;
-		QDateTime cheCheckTime;
-		QDateTime bioCheckTime;
-		Rt::SterilizeVerdict phyResult;
-		Rt::SterilizeVerdict cheResult;
-		Rt::SterilizeVerdict bioResult;
-		SterilizeCheck() : phyResult(Rt::Unchecked), cheResult(Rt::Unchecked), bioResult(Rt::Unchecked) {}
+	struct _disinfect_
+	{
+		QString disinfect_id;
+		QString disinfect_name;
+		QDateTime disinfect_time;
+
+		int disinfect_method;
+		int disinfect_result;
+		QString disinfect_remark;
 	};
 
-	struct Dispatch : public _optime_ {
-		QString dept;
+	struct _end_rinse_
+	{
+		QDateTime end_rinse_time;
+		int end_rinse_result;
+		QString end_rinse_remark;
 	};
 
-	typedef struct _optime_ SurgerBind, SurgeryPreCheck, SurgeryPostCheck;
-
-	struct Use {
-		QString patientId;
-		QString patientName;
-		QString surgeryName;
-		QDateTime surgeryTime;
-		// TODO: surgeryId?
-		int surgeryId = 0;
+	struct _dry_
+	{
+		QDateTime dry_time;
+		QString dry_remark;
 	};
 
-	Rt::FlowStatus status = Rt::UnknownFlowStatus;
-	bool isRecalled = false;
-	Wash wash;
-	Pack pack;
-	Sterilize ster;
-	SterilizeCheck sterCheck;
-	Dispatch dispatch;
-	SurgerBind bind;
-	Use use;
-	SurgeryPreCheck preCheck;
-	SurgeryPostCheck postCheck;
+	struct _storage_
+	{
+		QString storage_id;
+		QString storage_name;
+		QDateTime storage_time;
+		QString storage_remark;
+	};
+
+	struct _use_
+	{
+		_op_ use_op;
+		Patient use_pt;
+		QDateTime use_time;
+		QString use_remark;
+	};
 };
