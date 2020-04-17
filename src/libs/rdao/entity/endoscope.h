@@ -17,5 +17,5 @@ struct Endoscope
 	Rt::FlowStatus status;
 	int lockerId;
 	QString remark;
-	Endoscope() : cycle(0), status(Rt::FlowStatus::Unknown) {}
+	Endoscope() : cycle(0), lockerId(0), status(Rt::FlowStatus::Unknown) {}
 };

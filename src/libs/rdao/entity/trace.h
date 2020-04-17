@@ -37,7 +37,7 @@ struct EndoscopeFlow {
 
 	struct _clean_
 	{
-		QString clean_id;
+		unsigned clean_id;
 		QString clean_name;
 		QDateTime clean_time;
 		
@@ -54,7 +54,7 @@ struct EndoscopeFlow {
 	};
 
 	struct _machine_ {
-		QString machine_id;
+		unsigned machine_id;
 		QString machine_name;
 		QDateTime leamachine_timek_time;
 		int machine_result;
@@ -63,7 +63,7 @@ struct EndoscopeFlow {
 
 	struct _disinfect_
 	{
-		QString disinfect_id;
+		unsigned disinfect_id;
 		QString disinfect_name;
 		QDateTime disinfect_time;
 
@@ -87,7 +87,7 @@ struct EndoscopeFlow {
 
 	struct _storage_
 	{
-		QString storage_id;
+		unsigned storage_id;
 		QString storage_name;
 		QDateTime storage_time;
 		QString storage_remark;

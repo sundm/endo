@@ -5,7 +5,7 @@
 
 struct Fluid
 {
-	int id;
+	unsigned id;
 	QString name;
 
 	Rt::FluidCategory type;
@@ -13,5 +13,5 @@ struct Fluid
 	int ratedCount;
 
 	QString desc;
-	Fluid() : type(Rt::FluidCategory::Clean), ratedCount(0), category(Rt::DisinfectCategory::Unknown) {}
+	Fluid() : id(0), type(Rt::FluidCategory::Clean), ratedCount(0), category(Rt::DisinfectCategory::Unknown) {}
 };

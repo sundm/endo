@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `t_endoscope` (
   `service_year` smallint NOT NULL DEFAULT 0, -- in years
   `step` int unsigned NOT NULL DEFAULT 0, -- 0:bind 1:leak 2:wash 3:rinse 4 in-machine 5:sterilize 6:ending-rinse 7:dry 8:storage 9:use 10:pre-processing
   `status` tinyint NOT NULL DEFAULT 0, -- 0:normal 1:service 2:forbidden
-  `locker_id` int NOT NULL DEFAULT 0,
+  `locker_id` int unsigned NOT NULL DEFAULT 0,
   `is_high_risk` tinyint NOT NULL DEFAULT 0,
   `photo` varchar(128),
   `last_maintain_time` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `t_program` (
 
 CREATE TABLE IF NOT EXISTS `t_device_programs` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `device_id` int NOT NULL,
-  `program_id` int NOT NULL
+  `device_id` int unsigned NOT NULL,
+  `program_id` int unsigned NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=150001 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `t_clean_fluid` (
@@ -104,10 +104,10 @@ CREATE TABLE IF NOT EXISTS `t_flow` (
 
 CREATE TABLE IF NOT EXISTS `t_flow_step` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `flow_id` varchar(32) NOT NULL,
+  `flow_id` int unsigned NOT NULL,
   `step_id` int unsigned NOT NULL DEFAULT 0,   -- 0:bind 1:leak 2:wash 3:rinse 4:sterilize 5:ending-rinse 6:dry 7:storage 8:use 9:pre-processing
   `reader_id` int NOT NULL DEFAULT 0,
-  `fluid` tinyint,
+  `fluid` int unsigned NOT NULL DEFAULT 0,
   `remark` varchar(256),
   KEY `idx_reader_id` (`reader_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=210001 DEFAULT CHARSET=utf8;
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `r_bench` (
   `leak_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `leak_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
   `leak_remark` varchar(256),
-  `clean_id` varchar(32) NOT NULL,
+  `clean_id` int unsigned NOT NULL DEFAULT 0,
   `clean_name` varchar(32) NOT NULL,
   `clean_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `clean_method` tinyint NOT NULL DEFAULT 0, -- 0:visual,1:Protein,2:ATP
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `r_bench` (
   `rinse_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
   `rinse_remark` varchar(256),
   `flow_category` tinyint NOT NULL, -- 0:manual; 1:auto step1;
-  `storage_id` varchar(32) NOT NULL,
+  `storage_id` int unsigned NOT NULL DEFAULT 0,
   `storage_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `storage_remark` varchar(256),
   KEY `idx_esp_udi_cycle` (`esp_udi`,`esp_cycle`) USING BTREE
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `r_machine` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `esp_udi` varchar(32) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
-  `machine_id` int unsigned NOT NULL,
+  `machine_id` int unsigned NOT NULL DEFAULT 0,
   `machine_name` varchar(32) NOT NULL,
   `machine_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `machine_result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `r_manual` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
   `esp_udi` varchar(32) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
-  `disinfect_id` varchar(32) NOT NULL,
+  `disinfect_id` int unsigned NOT NULL DEFAULT 0,
   `disinfect_name` varchar(32) NOT NULL,
   `disinfect_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `disinfect_method` tinyint NOT NULL DEFAULT 0, -- 0:visual
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `r_use` (
   `op_udi`  varchar(32) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `use_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `patient_id` int NOT NULL,
+  `patient_id` varchar(32) NOT NULL,
   `patient_name` varchar(32) NOT NULL,
   `patient_age` tinyint DEFAULT 0,
   `patient_gender` tinyint(1) DEFAULT 2,  -- 0:male 1:female

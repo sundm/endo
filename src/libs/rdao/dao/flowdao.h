@@ -18,7 +18,7 @@ class RDAO_EXPORT FlowDao
 {
 public:
 
-	result_t addBind(const QString &esp_udi, const QString &op_udi, Endoscope *esp, Operator *op);
+	result_t addBind(const Endoscope &esp, const Operator &op);
 
 	result_t addLeak(const Endoscope &esp);
 
@@ -32,7 +32,7 @@ public:
 
 	result_t updateRinseResult(const Endoscope &esp, const CommonResult &result, Rt::RinseType rise = Rt::RinseType::Begin);
 
-	result_t addMachineWash(int machineId, const Program &program, const Endoscope &esp);
+	result_t addMachineWash(unsigned machineId, const Program &program, const Endoscope &esp);
 
 	result_t updateMachineWashResult(const Endoscope &esp, const MachineWashResult &result);
 
