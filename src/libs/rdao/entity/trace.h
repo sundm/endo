@@ -4,15 +4,17 @@
 #include "patient.h"
 #include <QDateTime>
 
+struct TraceEsp
+{
+	QString udi;
+	QString name;
+	int cycle;
+	int category;	//0:manual; 1:with machine
+};
 
 struct EndoscopeFlow {
-	struct _common_
-	{
-		QString udi;
-		QString name;
-		int cycle;
-		int category;	//0:manual; 1:with machine
-	};
+	
+	TraceEsp esp;
 
 	struct _op_ {
 		QString op_udi;

@@ -15,7 +15,7 @@ struct Endoscope
 	int maintain_cycle;
 	Rt::EndoscopeCategory category;
 	Rt::FlowStatus status;
-	int lockerId;
+	unsigned lockerId;
 	QString remark;
 	Endoscope() : cycle(0), lockerId(0), status(Rt::FlowStatus::Unknown) {}
 };

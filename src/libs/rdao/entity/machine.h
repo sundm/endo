@@ -15,7 +15,7 @@ struct Program {
 };
 
 struct Machine {
-	int id;
+	unsigned id;
 	QString name;
 	Rt::MachineCategory category;
 	Rt::MachineStatus status;
@@ -23,11 +23,11 @@ struct Machine {
 	int cycleTotal;
 	QDate productionDate;
 	QDateTime lastMaintainTime;
-	unsigned int maintainCycle;
+	unsigned maintainCycle;
 	QList<Program> programs;
 
 	Machine() :
-		id(-1),
+		id(0),
 		category(Rt::MachineCategory::Unknown),
 		status(Rt::Idle),
 		cycleToday(-1),
