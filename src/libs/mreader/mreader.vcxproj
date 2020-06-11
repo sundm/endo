@@ -52,11 +52,11 @@
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <QtInstall>563-msvc2017-x86</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>core;network</QtModules>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <QtInstall>563-msvc2017-x86</QtInstall>
-    <QtModules>core</QtModules>
+    <QtModules>core;network</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -98,7 +98,7 @@
     <ClCompile Include="mreader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mreader.h" />
+    <QtMoc Include="mreader.h" />
     <ClInclude Include="mreader_global.h" />
   </ItemGroup>
   <ItemGroup>

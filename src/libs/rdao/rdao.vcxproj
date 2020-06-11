@@ -99,10 +99,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="clinicdao.h" />
+    <ClInclude Include="dao\clinicdao.h" />
     <ClInclude Include="dao\endoscopedao.h" />
     <ClInclude Include="dao\flowdao.h" />
     <ClInclude Include="dao\fluidao.h" />
+    <ClInclude Include="dao\historydao.h" />
     <ClInclude Include="dao\machinedao.h" />
     <ClInclude Include="dao\operatordao.h" />
     <ClInclude Include="dao\tracedao.h" />
@@ -112,6 +113,7 @@
     <ClInclude Include="entity\enums.h" />
     <ClInclude Include="entity\flow.h" />
     <ClInclude Include="entity\fluid.h" />
+    <ClInclude Include="entity\history.h" />
     <ClInclude Include="entity\machine.h" />
     <ClInclude Include="entity\operator.h" />
     <ClInclude Include="entity\patient.h" />
@@ -122,6 +124,7 @@
     <ClInclude Include="rdao_global.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dao\operatordao.cpp" />
     <ClCompile Include="dbconnection.cpp" />
     <ClCompile Include="debugsqlquery.cpp" />
   </ItemGroup>

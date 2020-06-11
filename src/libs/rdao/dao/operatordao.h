@@ -7,11 +7,13 @@ class Operator;
 class RDAO_EXPORT OperatorDao
 {
 public:
-	result_t login(int id, const QString &pwd, Operator *op = Q_NULLPTR);
-	void logout(int id);
+	result_t login(const QString &udi, const QString &pwd, Operator *op = Q_NULLPTR);
+	result_t login(const QString &udi, Operator *op = Q_NULLPTR);
+	void logout(const QString &udi);
 
 	result_t addOperator(const Operator &op);
-	result_t changePassword(int id, const QString &oldPwd, const QString &newPwd);
-	result_t frozen(int id);
-	result_t unfreeze(int id);
+	result_t getOperator(const QString &udi, Operator *op = Q_NULLPTR);
+
+	result_t changePassword(const QString &udi, const QString &oldPwd, const QString &newPwd);
+	result_t changeStatus(const QString &udi, Rt::Status status);
 };

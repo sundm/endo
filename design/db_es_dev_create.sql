@@ -4,20 +4,20 @@ use es_dev;
 
 CREATE TABLE IF NOT EXISTS `t_operator` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `udi` varchar(32) NOT NULL UNIQUE,
+  `udi` char(10) NOT NULL UNIQUE,
   `pwd` char(40) NOT NULL,
   `name` varchar(32) NOT NULL,
   `phone` varchar(128) NOT NULL,
   `gender` tinyint NOT NULL,  -- 0:male 1:female
   `status` tinyint NOT NULL DEFAULT 0, -- 0:normal 1:frozen 2:deleted
-  `role` tinyint NOT NULL, -- 1:admin 2:ESUser 4:ClinicUser
+  `role` tinyint NOT NULL, -- 0:admin 1:HeadNurse 2:OPUser 3:ClinicUser
   `is_del` tinyint NOT NULL DEFAULT 0,
   KEY `idx_udi` (`udi`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=110001 DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `t_endoscope` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `udi` varchar(32) NOT NULL UNIQUE,
+  `udi` char(10) NOT NULL UNIQUE,
   `cycle` int(11) NOT NULL DEFAULT 0,
   `name` varchar(32) NOT NULL,
   `production_time` datetime NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `t_flow` (
   `category` tinyint NOT NULL, -- 0:manual; 1:auto
   `status` tinyint NOT NULL DEFAULT 0, -- 0:idle 1:running
   `cycle` int unsigned NOT NULL DEFAULT 0,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `remark` varchar(128)
 ) ENGINE=InnoDB AUTO_INCREMENT=200001 DEFAULT CHARSET=utf8;
 
@@ -122,10 +122,10 @@ CREATE TABLE IF NOT EXISTS `t_version` (
 
 CREATE TABLE IF NOT EXISTS `r_bench` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `esp_name` varchar(32) NOT NULL,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `bind_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `leak_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `r_bench` (
 
 CREATE TABLE IF NOT EXISTS `r_machine` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `machine_id` int unsigned NOT NULL DEFAULT 0,
   `machine_name` varchar(32) NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `r_machine` (
 
 CREATE TABLE IF NOT EXISTS `r_manual` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `disinfect_id` int unsigned NOT NULL DEFAULT 0,
   `disinfect_name` varchar(32) NOT NULL,
@@ -182,10 +182,10 @@ CREATE TABLE IF NOT EXISTS `r_manual` (
 
 CREATE TABLE IF NOT EXISTS `r_use` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `esp_name` varchar(32) NOT NULL,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `use_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `patient_id` varchar(32) NOT NULL,
@@ -211,10 +211,10 @@ CREATE TABLE IF NOT EXISTS `r_preprocess` (
 
 CREATE TABLE IF NOT EXISTS `r_concentration` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `esp_name` varchar(32) NOT NULL,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `op_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
@@ -224,10 +224,10 @@ CREATE TABLE IF NOT EXISTS `r_concentration` (
 
 CREATE TABLE IF NOT EXISTS `r_microbial` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `esp_udi` varchar(32) NOT NULL,
+  `esp_udi` char(10) NOT NULL,
   `esp_cycle` int unsigned NOT NULL DEFAULT 0,
   `esp_name` varchar(32) NOT NULL,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `op_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `r_microbial` (
 
 CREATE TABLE IF NOT EXISTS `r_hand` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `op_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal
@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `r_hand` (
 
 CREATE TABLE IF NOT EXISTS `r_env` (
   `id` int unsigned PRIMARY KEY AUTO_INCREMENT,
-  `op_udi`  varchar(32) NOT NULL,
+  `op_udi`  char(10) NOT NULL,
   `op_name` varchar(32) NOT NULL,
   `op_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `result` tinyint NOT NULL DEFAULT 0, -- 0:normal,1:abnormal

@@ -23,7 +23,7 @@ namespace Rt
 	};
 
 	enum Role {
-		Admin = 1,
+		Admin = 0,
 		HeadNurse,
 		OpUser,
 		ClinicUser,
